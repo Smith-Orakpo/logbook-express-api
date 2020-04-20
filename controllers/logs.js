@@ -54,7 +54,21 @@ const upd = async (req, res, next) => {
 	}
 }
 
-const rmv = (req, res, next) => {}
+const rmv = (req, res, next) => {
+	/**
+	 * DELETE A LOG (NOTE: IF BELONGING TO REQUEST USER)
+	 */
+	Log.findByPk(req.params.id)
+		.then(log => {
+			if (!log) return res.status(404).send("not found")
+			// ACCESS-CONTROL
+			if (log.UserId !== req.user.id)
+				return res.status(403).send("unauthorized")
+			log.destroy()
+			res.send(log)
+		})
+		.catch(error => next(error))
+}
 
 module.exports = {
 	all,
