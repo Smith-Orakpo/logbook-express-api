@@ -34,7 +34,25 @@ const add = (req, res, next) => {
 		.catch(error => next(error))
 }
 
-const upd = (req, res, next) => {}
+const upd = async (req, res, next) => {
+	/**
+	 * UPDATE A LOG (NOTE: IF BELONGING TO REQUEST USER)
+	 */
+	const { title, desc } = req.body
+	try {
+		const log = await Log.findByPk(req.params.id)
+		if (!log) return res.status(404).send("not found")
+		// ACCESS-CONTROL
+		if (log.UserId !== req.user.id) return res.status(403).send("unauthorized")
+		// EDIT LOG CONTENT
+		log.title = title || log.title
+		log.desc = desc || log.desc
+		log.save()
+		res.send(log)
+	} catch (error) {
+		next(error)
+	}
+}
 
 const rmv = (req, res, next) => {}
 
