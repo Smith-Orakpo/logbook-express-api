@@ -9,7 +9,20 @@ const all = (req, res, next) => {
 		.catch(error => next(error))
 }
 
-const one = (req, res, next) => {}
+const one = (req, res, next) => {
+	/**
+	 * RETURN A LOG (NOTE: IF BELONGING TO REQUEST USER)
+	 */
+	Log.findByPk(req.params.id)
+		.then(log => {
+			if (!log) return res.status(404).send("not found")
+			// ACCESS-CONTROL
+			if (log.UserId !== req.user.id)
+				return res.status(403).send("unauthorized")
+			res.send(log)
+		})
+		.catch(error => next(error))
+}
 
 const add = (req, res, next) => {}
 
