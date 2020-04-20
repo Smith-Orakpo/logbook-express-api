@@ -24,7 +24,15 @@ const one = (req, res, next) => {
 		.catch(error => next(error))
 }
 
-const add = (req, res, next) => {}
+const add = (req, res, next) => {
+	/**
+	 * CREATE A LOG FOR REQUEST USER
+	 */
+	const { title, desc } = req.body
+	Log.create({ title, desc, UserId: req.user.id })
+		.then(log => res.send(log))
+		.catch(error => next(error))
+}
 
 const upd = (req, res, next) => {}
 
