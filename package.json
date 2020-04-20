@@ -1,0 +1,30 @@
+{
+	"name": "logbook_express_api",
+	"version": "1.0.0",
+	"description": "express json logbook api",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index",
+		"serve": "nodemon index"
+	},
+	"keywords": [
+		"logbook",
+		"api"
+	],
+	"author": "smith orakpo",
+	"license": "ISC",
+	"devDependencies": {
+		"dotenv": "^8.2.0",
+		"nodemon": "^2.0.3"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"morgan": "^1.10.0",
+		"sequelize": "^5.21.6",
+		"sqlite3": "^4.1.1",
+		"validator": "^13.0.0"
+	}
+}
