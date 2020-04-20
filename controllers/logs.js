@@ -1,3 +1,5 @@
+const { Log } = require("../database")
+
 const all = (req, res, next) => {}
 
 const one = (req, res, next) => {}
